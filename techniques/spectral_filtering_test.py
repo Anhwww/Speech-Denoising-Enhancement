@@ -5,11 +5,11 @@ from spectral_filtering.spectral_filtering import spectral_filtering
 
 # Load the WAV file
 # Airport
-sample_rate1, data1 = wav.read('../audio_files/airport.wav')
+sample_rate1, data1 = wav.read("../audio_files/airport.wav")
 # Cafe
-sample_rate2, data2 = wav.read('../audio_files/cafe.wav')
+sample_rate2, data2 = wav.read("../audio_files/cafe.wav")
 # Rainstorm
-sample_rate3, data3 = wav.read('../audio_files/rainstorm.wav')
+sample_rate3, data3 = wav.read("../audio_files/rainstorm.wav")
 
 # Extract the channels
 # Airport
@@ -32,45 +32,31 @@ filtered_channel3_2 = spectral_filtering(channel3_1, channel3_2)
 
 # Save the filtered data to a new WAV file
 # Airport
-path1 = '../filtered_audio_files/' + 'sf_airport.wav'
+path1 = "../filtered_audio_files/" + "sf_airport.wav"
 wav.write(path1, sample_rate1, filtered_channel1_2.astype(np.int16))
 # Cafe
-path2 = '../filtered_audio_files/' + 'sf_cafe.wav'
+path2 = "../filtered_audio_files/" + "sf_cafe.wav"
 wav.write(path2, sample_rate1, filtered_channel2_2.astype(np.int16))
 # Rainstorm
-path3 = '../filtered_audio_files/' + 'sf_rainstorm.wav'
+path3 = "../filtered_audio_files/" + "sf_rainstorm.wav"
 wav.write(path3, sample_rate1, filtered_channel3_2.astype(np.int16))
 
 # Create a time array for plotting
 time = np.arange(len(channel1_2)) / sample_rate1
 
-# Def for each audio = each figure 
-def plot(channel, filtered_channel, a):
+
+# Def for each audio = each figure
+def plot(channel, filtered_channel, title):
     # Create figure for plotting
-    plt.figure(num=a, figsize=(15, 10))
-
-    # Plot the original signal
-    plt.subplot(3, 1, 1)
-    plt.plot(channel)
-    plt.xlabel('Time')
-    plt.ylabel('Amplitude')
-    plt.title('Original')
-
-    # Plot the filtered signal
-    plt.subplot(3, 1, 2)
-    plt.plot(filtered_channel)
-    plt.xlabel('Time')
-    plt.ylabel('Amplitude')
-    plt.title('Filtered')
+    plt.figure(figsize=(16, 9))
+    plt.title(title, fontsize=20)
 
     # Plot both original and filtered signal
-    plt.subplot(3, 1, 3)
-    plt.plot(channel, label='Original')
-    plt.plot(filtered_channel, label='Filtered')
-    plt.xlabel('Time')
-    plt.ylabel('Amplitude')
-    plt.title('Original and Filtered')
-    plt.legend()
+    plt.plot(channel, label="Original")
+    plt.plot(filtered_channel, label="Filtered")
+    plt.xlabel("Time")
+    plt.ylabel("Amplitude")
+    plt.legend(fontsize="large")
 
     # Show plot
     plt.show()
@@ -79,6 +65,6 @@ def plot(channel, filtered_channel, a):
 
 
 # Plotting all
-plot(channel1_2, filtered_channel1_2, 'Airport')   # Airport
-plot(channel2_2, filtered_channel2_2, 'Cafe')      # Cafe
-plot(channel3_2, filtered_channel3_2, 'Rainstorm') # Rainstorm
+plot(channel1_2, filtered_channel1_2, "Airport Noise")  # Airport
+plot(channel2_2, filtered_channel2_2, "Cafe Noise")  # Cafe
+plot(channel3_2, filtered_channel3_2, "Rainstorm Noise")  # Rainstorm
